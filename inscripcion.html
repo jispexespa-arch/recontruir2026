@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inscripción · Reconstruir 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --carbon:    #0D0D0D;
+  --carbon-2:  #111111;
+  --carbon-3:  #161616;
+  --bone:      #F3EFE7;
+  --orange:    #FF6B35;
+  --sand:      #B8ADA0;
+  --bone-20:   rgba(243,239,231,0.18);
+  --bone-10:   rgba(243,239,231,0.10);
+  --bone-06:   rgba(243,239,231,0.06);
+  --orange-15: rgba(255,107,53,0.15);
+  --orange-08: rgba(255,107,53,0.08);
+  --grid-c:    rgba(243,239,231,0.055);
+  --f-display: 'Barlow Condensed', sans-serif;
+  --f-body:    'Barlow', sans-serif;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--f-body);
+  background:var(--carbon);
+  color:var(--bone);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1);}
+.reveal.on{opacity:1;transform:translateY(0);}
+.rd1{transition-delay:.07s;}.rd2{transition-delay:.14s;}.rd3{transition-delay:.21s;}.rd4{transition-delay:.28s;}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:60px;padding:0 5%;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(13,13,13,0.96);
+  border-bottom:1px solid var(--bone-06);
+  backdrop-filter:blur(12px);
+}
+.nav-logo{
+  font-family:var(--f-display);font-weight:900;font-size:17px;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--bone);text-decoration:none;
+}
+.nav-logo em{color:var(--orange);font-style:normal;}
+.nav-links{display:flex;gap:2rem;align-items:center;list-style:none;}
+.nav-links a{
+  font-size:11px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--sand);text-decoration:none;transition:color .2s;
+}
+.nav-links a:hover{color:var(--bone);}
+.nav-back{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--f-display);font-weight:600;
+  font-size:11px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--sand);text-decoration:none;transition:color .2s;
+}
+.nav-back:hover{color:var(--bone);}
+.nav-back::before{content:'←';font-size:13px;}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
+.nav-burger span{display:block;width:22px;height:1.5px;background:var(--bone);}
+.nav-mobile{
+  display:none;position:fixed;top:60px;left:0;right:0;z-index:99;
+  background:rgba(13,13,13,0.98);border-bottom:1px solid var(--bone-06);
+  padding:1.5rem 5%;flex-direction:column;gap:1.2rem;
+}
+.nav-mobile a{font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:var(--sand);text-decoration:none;}
+.nav-mobile.open{display:flex;}
+
+/* ── PAGE HEADER ── */
+.page-header{
+  padding:7rem 5% 4rem;
+  border-bottom:1px solid var(--bone-06);
+  position:relative;overflow:hidden;
+}
+.page-header::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(var(--grid-c) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid-c) 1px,transparent 1px);
+  background-size:64px 64px;
+}
+.page-header::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 100% at 0% 50%,rgba(13,13,13,.6) 0%,transparent 100%);
+}
+.page-header-inner{position:relative;z-index:1;}
+.ph-tag{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:10px;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--sand);margin-bottom:1rem;
+}
+.ph-tag::before{content:'';width:22px;height:1px;background:var(--orange);}
+.ph-title{
+  font-family:var(--f-display);font-weight:900;
+  font-size:clamp(48px,8vw,90px);line-height:.88;
+  letter-spacing:-.01em;text-transform:uppercase;color:var(--bone);
+}
+.ph-title em{color:var(--orange);font-style:normal;}
+.ph-sub{
+  font-size:15px;color:var(--sand);line-height:1.7;
+  max-width:500px;margin-top:1rem;
+}
+
+/* ── MAIN LAYOUT ── */
+.main{
+  display:grid;grid-template-columns:1fr 380px;gap:1px;
+  background:var(--bone-06);
+  border-bottom:1px solid var(--bone-06);
+}
+
+/* ── PROCESO ── */
+.proceso{
+  background:var(--carbon-2);
+  padding:3.5rem 5%;
+}
+.proceso-title{
+  font-family:var(--f-display);font-weight:700;
+  font-size:13px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--orange);margin-bottom:2rem;
+}
+.steps{display:flex;flex-direction:column;gap:0;}
+.step{
+  display:flex;gap:1.5rem;
+  padding:1.75rem 0;border-bottom:1px solid var(--bone-06);
+  position:relative;
+}
+.step:last-child{border-bottom:none;}
+.step-num{
+  font-family:var(--f-display);font-weight:900;
+  font-size:36px;color:var(--orange);line-height:1;
+  flex-shrink:0;width:40px;
+}
+.step-body{}
+.step-title{
+  font-family:var(--f-display);font-weight:700;
+  font-size:18px;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--bone);margin-bottom:.4rem;line-height:1.1;
+}
+.step-text{font-size:14px;color:var(--sand);line-height:1.65;}
+.step-text strong{color:var(--bone);font-weight:600;}
+
+/* ── ALERTAS ── */
+.alerts{
+  margin-top:2.5rem;
+  display:flex;flex-direction:column;gap:1px;
+  background:var(--bone-06);
+  border:1px solid var(--bone-06);
+}
+.alert{
+  padding:1.25rem 1.5rem;
+  display:flex;gap:1rem;align-items:flex-start;
+}
+.alert-menor{background:var(--carbon-3);}
+.alert-extranjero{background:var(--carbon-2);}
+.alert-icon{
+  font-family:var(--f-display);font-weight:900;
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--orange);flex-shrink:0;padding-top:2px;
+  border-left:2px solid var(--orange);padding-left:10px;
+}
+.alert-content{}
+.alert-title{
+  font-family:var(--f-display);font-weight:700;
+  font-size:14px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--bone);margin-bottom:.3rem;
+}
+.alert-text{font-size:13px;color:var(--sand);line-height:1.6;}
+.alert-link{
+  color:var(--orange);text-decoration:none;
+  font-weight:600;transition:opacity .2s;
+}
+.alert-link:hover{opacity:.75;}
+
+/* ── SIDEBAR CTA ── */
+.sidebar{
+  background:var(--carbon-3);
+  padding:3.5rem 2rem;
+  display:flex;flex-direction:column;
+  position:sticky;top:60px;
+  height:fit-content;
+}
+.sb-tag{
+  font-size:10px;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--sand);margin-bottom:1.5rem;
+  display:flex;align-items:center;gap:10px;
+}
+.sb-tag::before{content:'';width:16px;height:1px;background:var(--orange);}
+.sb-price{
+  font-family:var(--f-display);font-weight:900;
+  font-size:72px;line-height:.85;letter-spacing:-.02em;color:var(--bone);
+  margin-bottom:.3rem;
+}
+.sb-price em{font-style:normal;color:var(--orange);font-size:32px;vertical-align:super;}
+.sb-price-label{
+  font-size:11px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--sand);display:block;margin-bottom:2rem;
+}
+
+.sb-includes{
+  display:flex;flex-direction:column;gap:0;
+  border-top:1px solid var(--bone-06);
+  border-bottom:1px solid var(--bone-06);
+  margin-bottom:2rem;
+}
+.sbi{
+  display:flex;align-items:center;gap:10px;
+  padding:.85rem 0;border-bottom:1px solid var(--bone-06);
+  font-size:13px;color:var(--sand);
+}
+.sbi:last-child{border-bottom:none;}
+.sbi::before{
+  content:'✓';color:var(--orange);font-weight:700;
+  font-family:var(--f-display);font-size:14px;flex-shrink:0;
+}
+
+.btn-primary{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  background:var(--orange);color:var(--carbon);
+  font-family:var(--f-display);font-weight:700;
+  font-size:16px;letter-spacing:.1em;text-transform:uppercase;
+  padding:18px 32px;text-decoration:none;
+  transition:filter .2s,transform .2s;width:100%;
+  margin-bottom:1rem;
+}
+.btn-primary:hover{filter:brightness(1.1);transform:translateY(-1px);}
+.btn-primary::after{content:'→';font-size:17px;transition:transform .2s;}
+.btn-primary:hover::after{transform:translateX(3px);}
+
+.sb-note{
+  font-size:11px;color:var(--bone-20);line-height:1.6;
+  letter-spacing:.04em;text-align:center;
+}
+
+.sb-dates{
+  margin-top:2rem;
+  padding-top:1.5rem;
+  border-top:1px solid var(--bone-06);
+  display:flex;flex-direction:column;gap:.6rem;
+}
+.sd-row{
+  display:flex;justify-content:space-between;align-items:baseline;
+}
+.sd-label{
+  font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--sand);
+}
+.sd-val{
+  font-family:var(--f-display);font-weight:700;
+  font-size:14px;letter-spacing:.04em;text-transform:uppercase;color:var(--bone);
+}
+
+/* ── CANCELACIÓN ── */
+.cancel-section{
+  background:var(--carbon-2);
+  padding:3rem 5%;
+  border-top:1px solid var(--bone-06);
+}
+.cancel-title{
+  font-family:var(--f-display);font-weight:700;
+  font-size:13px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--orange);margin-bottom:1.5rem;
+}
+.cancel-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:var(--bone-06);border:1px solid var(--bone-06);
+}
+.cancel-card{
+  background:var(--carbon-2);padding:1.5rem;
+}
+.cc-label{
+  font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--sand);margin-bottom:.6rem;
+}
+.cc-val{
+  font-family:var(--f-display);font-weight:900;
+  font-size:20px;letter-spacing:.02em;text-transform:uppercase;
+  color:var(--bone);margin-bottom:.4rem;line-height:1.1;
+}
+.cc-text{font-size:13px;color:var(--sand);line-height:1.55;}
+
+/* ── CTA FINAL ── */
+.cta-final{
+  background:var(--carbon);padding:5rem 5%;text-align:center;
+  position:relative;overflow:hidden;
+  border-top:1px solid var(--bone-06);
+}
+.cta-final::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(var(--grid-c) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid-c) 1px,transparent 1px);
+  background-size:64px 64px;
+}
+.cta-final-inner{position:relative;z-index:1;}
+.cta-final-title{
+  font-family:var(--f-display);font-weight:900;
+  font-size:clamp(36px,6vw,70px);line-height:.9;
+  letter-spacing:-.01em;text-transform:uppercase;color:var(--bone);
+  margin-bottom:1rem;
+}
+.cta-final-title em{color:var(--orange);font-style:normal;}
+.cta-final-sub{
+  font-size:15px;color:var(--sand);max-width:400px;
+  margin:0 auto 2rem;line-height:1.7;
+}
+.btn-primary-center{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--orange);color:var(--carbon);
+  font-family:var(--f-display);font-weight:700;
+  font-size:16px;letter-spacing:.1em;text-transform:uppercase;
+  padding:18px 40px;text-decoration:none;
+  transition:filter .2s,transform .2s;
+}
+.btn-primary-center:hover{filter:brightness(1.1);transform:translateY(-1px);}
+.btn-primary-center::after{content:'→';font-size:17px;}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--carbon-3);border-top:1px solid var(--bone-06);
+  padding:2rem 5%;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;
+}
+.footer-logo{
+  font-family:var(--f-display);font-weight:900;font-size:15px;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--bone);
+}
+.footer-logo em{color:var(--orange);font-style:normal;}
+.footer-links{display:flex;gap:1.5rem;flex-wrap:wrap;}
+.footer-links a{
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--sand);text-decoration:none;transition:color .2s;
+}
+.footer-links a:hover{color:var(--bone);}
+.footer-copy{font-size:11px;color:var(--bone-20);letter-spacing:.08em;text-transform:uppercase;width:100%;margin-top:.5rem;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:860px){
+  .main{grid-template-columns:1fr;}
+  .sidebar{position:static;border-top:1px solid var(--bone-06);}
+  .cancel-grid{grid-template-columns:1fr;}
+}
+@media(max-width:640px){
+  nav{padding:0 4%;}
+  .nav-links{display:none;}
+  .nav-burger{display:flex;}
+  .page-header{padding:6rem 4% 3rem;}
+  .proceso{padding:2.5rem 4%;}
+  .cancel-section{padding:2.5rem 4%;}
+  .sidebar{padding:2.5rem 4%;}
+  footer{flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Reconstruir<em>.</em> 2026</a>
+  <ul class="nav-links">
+    
+    
+    
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="normas.html">Normas</a></li>
+  </ul>
+  <div class="nav-burger" id="burger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="nav-mobile" id="nav-mobile">
+  <a href="index.html">Inicio</a>
+  
+  
+  
+  <a href="faq.html">FAQ</a>
+  <a href="normas.html">Normas</a>
+</div>
+
+<!-- HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="ph-tag reveal">Inscripción</div>
+    <h1 class="ph-title reveal rd1">RESERVA<br>TU <em>PLAZA.</em></h1>
+    <p class="ph-sub reveal rd2">Plazas limitadas. No lo dejes para última hora.</p>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- PROCESO -->
+  <div class="proceso">
+    <div class="proceso-title reveal">Cómo inscribirte</div>
+    <div class="steps">
+      <div class="step reveal rd1">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">Rellena el formulario online</div>
+          <p class="step-text">Haz clic en el botón y completa el formulario con tus datos. <strong>Si eres menor de 18, tu tutor legal deberá rellenar la parte correspondiente.</strong></p>
+        </div>
+      </div>
+      <div class="step reveal rd2">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">Recibe la confirmación</div>
+          <p class="step-text">En un máximo de <strong>48 horas</strong> recibirás un email con los datos bancarios para realizar el pago de 150€.</p>
+        </div>
+      </div>
+      <div class="step reveal rd3">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">Realiza el pago</div>
+          <p class="step-text">Transferencia bancaria. <strong>Tienes 5 días</strong> para completar el pago desde la inscripción. Si vienes de fuera de España, puedes usar transferencia SEPA.</p>
+        </div>
+      </div>
+      <div class="step reveal rd4">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <div class="step-title">Plaza confirmada</div>
+          <p class="step-text">Una vez verificado el pago, recibirás la <strong>confirmación definitiva</strong> con toda la información logística, cómo llegar y qué llevar.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ALERTAS -->
+    <div class="alerts reveal">
+      <div class="alert alert-menor">
+        <div class="alert-icon">Menor</div>
+        <div class="alert-content">
+          <div class="alert-title">Si eres menor de 18</div>
+          <p class="alert-text">Tu tutor legal debe completar la sección del formulario y firmar la autorización parental. Se entrega en papel el día de llegada. Sin ella no es posible participar. <a href="normas.html" class="alert-link">Ver autorización →</a></p>
+        </div>
+      </div>
+      <div class="alert alert-extranjero">
+        <div class="alert-icon">Extranjero</div>
+        <div class="alert-content">
+          <div class="alert-title">Si vienes de fuera de España</div>
+          <p class="alert-text">Necesitas pasaporte o DNI europeo válido y la Tarjeta Sanitaria Europea (EHIC). Para el pago te facilitaremos el IBAN y BIC para transferencia SEPA. <a href="faq.html" class="alert-link">Ver FAQ →</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sb-tag">Precio</div>
+    <div class="sb-price"><em>€</em>150</div>
+    <span class="sb-price-label">Por persona · Pago único</span>
+    <div class="sb-includes">
+      <div class="sbi">Alojamiento 2 noches</div>
+      <div class="sbi">Todas las comidas</div>
+      <div class="sbi">Piscina e instalaciones</div>
+      <div class="sbi">Actividades y talleres</div>
+      <div class="sbi">Transporte interno</div>
+    </div>
+    <a href="https://forms.gle/pF9Qa3ZTZm18Pr6NA" target="_blank" rel="noopener" class="btn-primary">Ir al formulario</a>
+    <p class="sb-note">Se abre en una nueva pestaña · Formulario seguro de Google</p>
+    <div class="sb-dates">
+      <div class="sd-row">
+        <span class="sd-label">Fechas</span>
+        <span class="sd-val">31 Jul — 2 Ago</span>
+      </div>
+      <div class="sd-row">
+        <span class="sd-label">Lugar</span>
+        <span class="sd-val">Toledo, España</span>
+      </div>
+      <div class="sd-row">
+        <span class="sd-label">Edad</span>
+        <span class="sd-val">+12 años</span>
+      </div>
+      <div class="sd-row">
+        <span class="sd-label">Plazas</span>
+        <span class="sd-val">Limitadas</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CANCELACIÓN -->
+<div class="cancel-section">
+  <div class="cancel-title reveal">Política de cancelación</div>
+  <div class="cancel-grid">
+    <div class="cancel-card reveal rd1">
+      <div class="cc-label">Hasta 15 días antes</div>
+      <div class="cc-val">50% devuelto</div>
+      <p class="cc-text">Cancelaciones con más de 15 días de antelación reciben la mitad del importe pagado.</p>
+    </div>
+    <div class="cancel-card reveal rd2">
+      <div class="cc-label">Menos de 15 días</div>
+      <div class="cc-val">Sin devolución</div>
+      <p class="cc-text">Puedes transferir tu plaza a otra persona con autorización previa de la organización.</p>
+    </div>
+    <div class="cancel-card reveal rd3">
+      <div class="cc-label">Cancelación por la organización</div>
+      <div class="cc-val">100% devuelto</div>
+      <p class="cc-text">Si el campamento se cancela por causas de fuerza mayor, se devuelve el importe íntegro.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CTA FINAL -->
+<div class="cta-final">
+  <div class="cta-final-inner">
+    <h2 class="cta-final-title reveal">¿A qué<br>esperas<em>?</em></h2>
+    <p class="cta-final-sub reveal rd1">Las plazas se asignan por orden de inscripción y pago. Cuanto antes te apuntes, mejor.</p>
+    <a href="https://forms.gle/pF9Qa3ZTZm18Pr6NA" target="_blank" rel="noopener" class="btn-primary-center reveal rd2">Inscribirme ahora</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">Reconstruir<em>.</em> 2026</span>
+  <div class="footer-links">
+    <a href="normas.html">Protección de datos</a>
+    <a href="normas.html">Autorización parental</a>
+    <a href="normas.html">Normas</a>
+  </div>
+  <span class="footer-copy">© 2026 Iglesia de la Santidad Pentecostal España</span>
+</footer>
+<!-- BOTTOM BAR MÓVIL -->
+<nav class="bottom-bar" aria-label="Navegación móvil">
+  <div class="bb-inner">
+    <a href="index.html" class="bb-item" data-page="index">
+      <div class="bb-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+      Inicio
+    </a>
+    <a href="faq.html" class="bb-item" data-page="faq">
+      <div class="bb-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      FAQ
+    </a>
+    <a href="normas.html" class="bb-item" data-page="normas">
+      <div class="bb-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+      Normas
+    </a>
+    <a href="inscripcion.html" class="bb-item bb-cta active" data-page="inscripcion" aria-current="page">
+      <div class="bb-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
+      Inscribirme
+    </a>
+  </div>
+</nav>
+<link rel="stylesheet" href="transitions.css">
+<script src="transitions.js"></script>
+</body>
+</html>

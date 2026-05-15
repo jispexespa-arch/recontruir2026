@@ -30,6 +30,31 @@ body{font-family:var(--f-body);background:var(--carbon);color:var(--bone);overfl
 .reveal.on{opacity:1;transform:translateY(0);}
 .rd1{transition-delay:.07s;}.rd2{transition-delay:.14s;}.rd3{transition-delay:.21s;}.rd4{transition-delay:.28s;}
 
+/* ── ACORDEÓN ── */
+.faq-list{display:flex;flex-direction:column;gap:1px;background:var(--bone-06);border:1px solid var(--bone-06);}
+.faq-item{background:var(--carbon-2);}
+.faq-q{
+  width:100%;background:none;border:none;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.3rem 1.5rem;cursor:pointer;
+  font-family:var(--f-display);font-weight:700;
+  font-size:17px;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--bone);text-align:left;gap:12px;
+  transition:color .2s,background .2s;
+}
+.faq-q:hover{color:var(--orange);background:var(--carbon-3);}
+.faq-item.open .faq-q{color:var(--orange);}
+.faq-icon{font-size:20px;color:var(--orange);flex-shrink:0;transition:transform .3s;font-weight:300;line-height:1;}
+.faq-item.open .faq-icon{transform:rotate(45deg);}
+.faq-a{
+  display:none;
+  font-size:14px;color:var(--sand);line-height:1.7;
+  padding:1rem 1.5rem 1.4rem;
+  border-top:1px solid var(--bone-06);
+  background:var(--carbon-3);
+}
+.faq-item.open .faq-a{display:block;}
+
 nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
   height:60px;padding:0 5%;

@@ -150,6 +150,36 @@ nav{
 .step-text{font-size:14px;color:var(--sand);line-height:1.65;}
 .step-text strong{color:var(--bone);font-weight:600;}
 
+.bank-box{
+  margin-top:1rem;
+  background:var(--carbon-3);
+  border:1px solid var(--bone-06);
+  border-left:3px solid var(--orange);
+  display:flex;flex-direction:column;gap:0;
+}
+.bank-row{
+  display:flex;align-items:baseline;
+  gap:1rem;padding:.75rem 1rem;
+  border-bottom:1px solid var(--bone-06);
+  flex-wrap:wrap;
+}
+.bank-row:last-child{border-bottom:none;}
+.bank-label{
+  font-family:var(--f-display);font-weight:700;
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--sand);flex-shrink:0;min-width:80px;
+}
+.bank-val{
+  font-family:var(--f-display);font-weight:700;
+  font-size:15px;letter-spacing:.04em;
+  color:var(--bone);
+}
+.bank-note{
+  font-family:var(--f-body);font-weight:400;
+  font-size:12px;color:var(--sand);
+  letter-spacing:.02em;text-transform:none;
+}
+
 /* ── ALERTAS ── */
 .alerts{
   margin-top:2.5rem;
@@ -412,19 +442,19 @@ footer{
       <div class="step reveal rd2">
         <div class="step-num">2</div>
         <div class="step-body">
-          <div class="step-title">Recibe la confirmación</div>
-          <p class="step-text">En un máximo de <strong>48 horas</strong> recibirás un email con los datos bancarios para realizar el pago de 150€.</p>
+          <div class="step-title">Realiza el pago</div>
+          <p class="step-text">Transferencia bancaria de <strong>150€</strong> a los siguientes datos. <strong>Tienes 5 días</strong> desde la inscripción para completarlo.</p>
+          <div class="bank-box">
+            <div class="bank-row"><span class="bank-label">IBAN</span><span class="bank-val">ES68 0081 0134 9100 0215 8617</span></div>
+            <div class="bank-row"><span class="bank-label">Banco</span><span class="bank-val">Banco de Sabadell, S.A.</span></div>
+            <div class="bank-row"><span class="bank-label">Titular</span><span class="bank-val">Iglesia de Santidad Pentecostal España</span></div>
+            <div class="bank-row"><span class="bank-label">BIC/SWIFT</span><span class="bank-val">BSABESBB <span class="bank-note">(fuera de España)</span></span></div>
+          </div>
+          <p class="step-text" style="margin-top:.75rem;">Envía el comprobante de pago a <strong><a href="mailto:jispexespa@gmail.com" style="color:var(--orange);text-decoration:none;">jispexespa@gmail.com</a></strong></p>
         </div>
       </div>
       <div class="step reveal rd3">
         <div class="step-num">3</div>
-        <div class="step-body">
-          <div class="step-title">Realiza el pago</div>
-          <p class="step-text">Transferencia bancaria. <strong>Tienes 5 días</strong> para completar el pago desde la inscripción. Si vienes de fuera de España, puedes usar transferencia SEPA.</p>
-        </div>
-      </div>
-      <div class="step reveal rd4">
-        <div class="step-num">4</div>
         <div class="step-body">
           <div class="step-title">Plaza confirmada</div>
           <p class="step-text">Una vez verificado el pago, recibirás la <strong>confirmación definitiva</strong> con toda la información logística, cómo llegar y qué llevar.</p>
@@ -445,7 +475,7 @@ footer{
         <div class="alert-icon">Extranjero</div>
         <div class="alert-content">
           <div class="alert-title">Si vienes de fuera de España</div>
-          <p class="alert-text">Necesitas pasaporte o DNI europeo válido y la Tarjeta Sanitaria Europea (EHIC). Para el pago te facilitaremos el IBAN y BIC para transferencia SEPA. <a href="faq.html" class="alert-link">Ver FAQ →</a></p>
+          <p class="alert-text">Necesitas pasaporte o DNI europeo válido y la Tarjeta Sanitaria Europea (EHIC). Para el pago usa transferencia SEPA con el IBAN y BIC/SWIFT indicados arriba.</p>
         </div>
       </div>
     </div>

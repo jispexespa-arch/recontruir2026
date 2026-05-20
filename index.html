@@ -3,762 +3,137 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JISPE CAMP 2026 · Campamento Juvenil Toledo</title>
+  <title>JISPE - CAMP 2026 · Campamento Juvenil Toledo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    /* ═══════════════════════════════════════
-       DESIGN TOKENS
-       ═══════════════════════════════════════ */
-    :root {
-      --accent: #5DD5E1;
-      --accent-dark: #3BBCC8;
-      --accent-glow: rgba(93, 213, 225, .25);
-      --bg-dark: #0B0F14;
-      --bg-card: #12171E;
-      --bg-card-hover: #181F28;
-      --text-primary: #F0F2F5;
-      --text-secondary: #9CA3AF;
-      --text-dim: #6B7280;
-      --radius: 12px;
-      --radius-lg: 20px;
-      --transition: .3s cubic-bezier(.4,0,.2,1);
-      --font-display: 'Bebas Neue', sans-serif;
-      --font-body: 'Inter', system-ui, sans-serif;
-    }
-
-    /* ═══════════════════════════════════════
-       RESET & BASE
-       ═══════════════════════════════════════ */
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior:smooth; -webkit-font-smoothing:antialiased; }
-    body {
-      font-family: var(--font-body);
-      background: var(--bg-dark);
-      color: var(--text-primary);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-    a { text-decoration:none; color:inherit; }
-    img { max-width:100%; display:block; }
-
-    /* ═══════════════════════════════════════
-       UTILITIES
-       ═══════════════════════════════════════ */
-    .container { width:min(1200px, 90%); margin:0 auto; }
-    .accent { color: var(--accent); }
-    .section-label {
-      font-size: .75rem;
-      font-weight: 600;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: .5rem;
-    }
-    .section-title {
-      font-family: var(--font-display);
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
-      line-height: 1.05;
-      margin-bottom: 1.5rem;
-    }
-    .section-title em {
-      font-style: italic;
-      color: var(--accent);
-    }
-
-    /* ═══════════════════════════════════════
-       CTA BUTTON
-       ═══════════════════════════════════════ */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      padding: 1rem 2rem;
-      background: var(--accent);
-      color: var(--bg-dark);
-      font-weight: 700;
-      font-size: .95rem;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      border-radius: 60px;
-      border: none;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-    .btn:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 8px 30px var(--accent-glow); }
-    .btn svg { width:18px; height:18px; }
-
-    .btn--outline {
-      background: transparent;
-      border: 2px solid var(--accent);
-      color: var(--accent);
-    }
-    .btn--outline:hover { background: var(--accent); color: var(--bg-dark); }
-
-    /* ═══════════════════════════════════════
-       NAV
-       ═══════════════════════════════════════ */
-    .nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 1rem 0;
-      background: rgba(11,15,20,.85);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(255,255,255,.06);
-    }
-    .nav .container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .nav-logo {
-      font-family: var(--font-display);
-      font-size: 1.3rem;
-      letter-spacing: .04em;
-    }
-    .nav-logo .dot { color: var(--accent); }
-    .nav-links { display: flex; gap: 1.5rem; align-items: center; }
-    .nav-links a {
-      font-size: .8rem;
-      font-weight: 600;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--text-secondary);
-      transition: var(--transition);
-    }
-    .nav-links a:hover { color: var(--accent); }
-    .nav-links .btn { padding: .6rem 1.4rem; font-size: .75rem; }
-
-    /* Mobile nav */
-    .nav-toggle { display:none; background:none; border:none; cursor:pointer; }
-    .nav-toggle span { display:block; width:22px; height:2px; background:var(--text-primary); margin:5px 0; transition:var(--transition); }
-
-    @media(max-width:768px) {
-      .nav-toggle { display:block; }
-      .nav-links {
-        position: fixed;
-        top: 0; right: -100%;
-        width: 75%; height: 100vh;
-        flex-direction: column;
-        justify-content: center;
-        background: var(--bg-dark);
-        transition: var(--transition);
-        gap: 2rem;
-      }
-      .nav-links.active { right: 0; }
-      .nav-links a { font-size: 1rem; }
-    }
-
-    /* ═══════════════════════════════════════
-       HERO
-       ═══════════════════════════════════════ */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: flex-end;
-      padding: 6rem 0 3rem;
-      overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background: url('hero-bg.jpeg') center/cover no-repeat;
-      filter: brightness(.35);
-    }
-    .hero-bg::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, var(--bg-dark) 0%, transparent 50%, rgba(11,15,20,.6) 100%);
-    }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-    }
-    .hero-top {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
-      color: var(--text-secondary);
-      font-size: .8rem;
-      font-weight: 500;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-    .hero-top::before {
-      content: '';
-      width: 40px;
-      height: 2px;
-      background: var(--accent);
-    }
-    .hero-heading {
-      font-family: var(--font-display);
-      font-size: clamp(4rem, 12vw, 9rem);
-      line-height: .9;
-      letter-spacing: -.02em;
-      margin-bottom: .5rem;
-    }
-    .hero-heading .dot { color: var(--accent); }
-    .hero-subtitle {
-      font-family: var(--font-display);
-      font-size: clamp(1rem, 2.5vw, 1.4rem);
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      color: var(--text-secondary);
-      margin-bottom: 2rem;
-    }
-    .hero-stats {
-      display: flex;
-      gap: 2.5rem;
-      margin-bottom: 1.5rem;
-    }
-    .hero-stat-number {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      color: var(--accent);
-      line-height: 1;
-    }
-    .hero-stat-label {
-      font-size: .7rem;
-      font-weight: 700;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--text-secondary);
-    }
-    .hero-desc {
-      max-width: 520px;
-      color: var(--text-secondary);
-      font-size: .95rem;
-      line-height: 1.7;
-      margin-bottom: 2rem;
-    }
-    .hero-cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      align-items: center;
-      margin-bottom: 1.5rem;
-    }
-    .hero-meta {
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-      font-size: .8rem;
-      color: var(--text-dim);
-    }
-    .hero-meta::before {
-      content: '';
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--accent);
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: .4; }
-    }
-
-    /* ═══════════════════════════════════════
-       EXPERIENCE SECTION
-       ═══════════════════════════════════════ */
-    .experience { padding: 6rem 0; }
-    .experience-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-    .exp-card {
-      background: var(--bg-card);
-      border: 1px solid rgba(255,255,255,.06);
-      border-radius: var(--radius);
-      padding: 2rem;
-      transition: var(--transition);
-    }
-    .exp-card:hover { background: var(--bg-card-hover); border-color: rgba(93,213,225,.15); transform: translateY(-4px); }
-    .exp-card-num {
-      font-family: var(--font-display);
-      font-size: 2.5rem;
-      color: var(--accent);
-      line-height: 1;
-      margin-bottom: .5rem;
-    }
-    .exp-card h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: .5rem;
-    }
-    .exp-card p { font-size: .88rem; color: var(--text-secondary); line-height: 1.6; }
-
-    /* ═══════════════════════════════════════
-       VERSE
-       ═══════════════════════════════════════ */
-    .verse {
-      padding: 5rem 0;
-      text-align: center;
-      position: relative;
-    }
-    .verse-quote {
-      font-family: var(--font-display);
-      font-size: clamp(1.5rem, 3.5vw, 2.4rem);
-      line-height: 1.3;
-      max-width: 800px;
-      margin: 0 auto 1rem;
-      position: relative;
-    }
-    .verse-quote::before {
-      content: '\201C';
-      font-size: 6rem;
-      color: var(--accent);
-      opacity: .3;
-      position: absolute;
-      top: -2.5rem;
-      left: -1rem;
-      line-height: 1;
-    }
-    .verse-ref {
-      font-size: .85rem;
-      font-weight: 600;
-      color: var(--accent);
-      letter-spacing: .1em;
-      text-transform: uppercase;
-    }
-
-    /* ═══════════════════════════════════════
-       PRICING
-       ═══════════════════════════════════════ */
-    .pricing {
-      padding: 6rem 0;
-    }
-    .price-card {
-      background: var(--bg-card);
-      border: 1px solid rgba(255,255,255,.06);
-      border-radius: var(--radius-lg);
-      padding: 3rem;
-      max-width: 500px;
-      margin-top: 2rem;
-    }
-    .price-amount {
-      font-family: var(--font-display);
-      font-size: 5rem;
-      line-height: 1;
-      margin-bottom: .25rem;
-    }
-    .price-amount .currency { font-size: 2rem; color: var(--accent); vertical-align: super; }
-    .price-label {
-      font-size: .85rem;
-      color: var(--text-secondary);
-      margin-bottom: 1.5rem;
-    }
-    .price-features {
-      list-style: none;
-      margin-bottom: 2rem;
-    }
-    .price-features li {
-      padding: .5rem 0;
-      font-size: .9rem;
-      color: var(--text-secondary);
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-    }
-    .price-features li::before {
-      content: '✓';
-      color: var(--accent);
-      font-weight: 700;
-    }
-
-    /* ═══════════════════════════════════════
-       ITINERARY
-       ═══════════════════════════════════════ */
-    .itinerary { padding: 6rem 0; }
-    .itinerary-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-    @media(max-width:768px) { .itinerary-grid { grid-template-columns: 1fr; } }
-    .day-card {
-      background: var(--bg-card);
-      border: 1px solid rgba(255,255,255,.06);
-      border-radius: var(--radius);
-      padding: 2rem;
-      text-align: center;
-      transition: var(--transition);
-    }
-    .day-card:hover { border-color: rgba(93,213,225,.2); }
-    .day-card-label {
-      font-size: .7rem;
-      font-weight: 700;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: .5rem;
-    }
-    .day-card h3 {
-      font-family: var(--font-display);
-      font-size: 1.5rem;
-    }
-
-    /* ═══════════════════════════════════════
-       FAQ
-       ═══════════════════════════════════════ */
-    .faq { padding: 6rem 0; }
-    .faq-group-title {
-      font-size: .7rem;
-      font-weight: 700;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin: 2.5rem 0 1rem;
-    }
-    .faq-list { margin-top: 2rem; }
-    .faq-item {
-      border-bottom: 1px solid rgba(255,255,255,.06);
-    }
-    .faq-q {
-      width: 100%;
-      background: none;
-      border: none;
-      color: var(--text-primary);
-      font-family: var(--font-body);
-      font-size: .95rem;
-      font-weight: 600;
-      padding: 1.25rem 0;
-      text-align: left;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: var(--transition);
-    }
-    .faq-q:hover { color: var(--accent); }
-    .faq-q .icon {
-      font-size: 1.3rem;
-      transition: var(--transition);
-      color: var(--accent);
-    }
-    .faq-item.open .faq-q .icon { transform: rotate(45deg); }
-    .faq-a {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height .4s ease, padding .3s ease;
-    }
-    .faq-item.open .faq-a { max-height: 600px; padding-bottom: 1.25rem; }
-    .faq-a p {
-      font-size: .88rem;
-      color: var(--text-secondary);
-      line-height: 1.7;
-    }
-
-    /* ═══════════════════════════════════════
-       FINAL CTA
-       ═══════════════════════════════════════ */
-    .final-cta {
-      padding: 6rem 0;
-      text-align: center;
-    }
-    .final-cta .section-title { margin-bottom: 1rem; }
-    .final-cta p {
-      color: var(--text-secondary);
-      max-width: 500px;
-      margin: 0 auto 2rem;
-      font-size: .95rem;
-    }
-    .final-cta-meta {
-      margin-top: 1.5rem;
-      font-size: .75rem;
-      color: var(--text-dim);
-      letter-spacing: .08em;
-    }
-
-    /* ═══════════════════════════════════════
-       FOOTER
-       ═══════════════════════════════════════ */
-    .footer {
-      padding: 3rem 0 2rem;
-      border-top: 1px solid rgba(255,255,255,.06);
-    }
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: start;
-      flex-wrap: wrap;
-      gap: 2rem;
-    }
-    .footer-brand {
-      font-family: var(--font-display);
-      font-size: 1.2rem;
-      margin-bottom: .5rem;
-    }
-    .footer-links { display: flex; gap: 1.5rem; }
-    .footer-links a { font-size: .8rem; color: var(--text-dim); transition: var(--transition); }
-    .footer-links a:hover { color: var(--accent); }
-    .footer-copy {
-      width: 100%;
-      text-align: center;
-      font-size: .7rem;
-      color: var(--text-dim);
-      margin-top: 2rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(255,255,255,.04);
-    }
-
-    /* ═══════════════════════════════════════
-       MOBILE NAV BAR (bottom)
-       ═══════════════════════════════════════ */
-    .mobile-nav {
-      display: none;
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      z-index: 100;
-      background: rgba(11,15,20,.95);
-      backdrop-filter: blur(16px);
-      border-top: 1px solid rgba(255,255,255,.06);
-      padding: .6rem 0 calc(.6rem + env(safe-area-inset-bottom));
-    }
-    .mobile-nav-inner {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-    }
-    .mobile-nav a {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: .2rem;
-      font-size: .6rem;
-      font-weight: 600;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      transition: var(--transition);
-    }
-    .mobile-nav a:hover, .mobile-nav a.active { color: var(--accent); }
-    .mobile-nav svg { width: 20px; height: 20px; }
-
-    @media(max-width:768px) {
-      .mobile-nav { display: block; }
-      body { padding-bottom: 70px; }
-    }
-
-    /* ═══════════════════════════════════════
-       ANIMATIONS
-       ═══════════════════════════════════════ */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity .6s ease, transform .6s ease;
-    }
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- ═══ NAV ═══ -->
+  <!-- NAV -->
   <nav class="nav">
     <div class="container">
-      <a href="#" class="nav-logo">JISPE CAMP<span class="dot">.</span> 2026</a>
+      <a href="index.html" class="nav-logo">JISPE <span class="dot">-</span> CAMP<span class="dot">.</span> 2026</a>
       <div class="nav-links" id="navLinks">
-        <a href="#faq">FAQ</a>
+        <a href="faq.html">FAQ</a>
         <a href="normas.html">Normas</a>
         <a href="inscripcion.html" class="btn">Inscribirme →</a>
       </div>
-      <button class="nav-toggle" id="navToggle" aria-label="Menú">
-        <span></span><span></span><span></span>
-      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Menú"><span></span><span></span><span></span></button>
     </div>
   </nav>
 
-  <!-- ═══ HERO ═══ -->
+  <!-- HERO -->
   <section class="hero">
     <div class="hero-bg"></div>
+    <div class="hero-lines">
+      <div class="hero-line-h"></div>
+      <div class="hero-line-h"></div>
+    </div>
+    <div class="hero-vertical">Nehemías 2:17 · Toledo · España</div>
     <div class="container hero-content">
-      <div class="hero-top">Campamento juvenil · Verano 2026</div>
-      <h1 class="hero-heading">
-        JISPE<br>CAMP<span class="dot">.</span>
-      </h1>
-      <p class="hero-subtitle">Una generación que se levanta</p>
-
+      <div class="hero-top">Campamento de verano 2026</div>
+      <h1 class="hero-heading">JISPE <span class="dot">-</span><br>CAMP<span class="dot">.</span></h1>
+      <p class="hero-sub">Una generación que se levanta</p>
       <div class="hero-stats">
-        <div>
-          <div class="hero-stat-number">3</div>
-          <div class="hero-stat-label">Días</div>
-        </div>
-        <div>
-          <div class="hero-stat-number">12–30</div>
-          <div class="hero-stat-label">Años</div>
-        </div>
+        <div><div class="hero-stat-n">3</div><div class="hero-stat-l">Días</div></div>
+        <div><div class="hero-stat-n">12–30</div><div class="hero-stat-l">Años</div></div>
       </div>
-
       <p class="hero-desc">Un encuentro donde Dios restaura lo que parecía perdido. Este verano, las ruinas se convierten en propósito.</p>
-
-      <div class="hero-cta-row">
+      <div class="hero-cta">
         <a href="inscripcion.html" class="btn">Inscribirme <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
       <div class="hero-meta">31 jul — 2 ago · Toledo, España</div>
     </div>
   </section>
 
-  <!-- ═══ EXPERIENCE ═══ -->
-  <section class="experience fade-in">
+  <!-- EXPERIENCE -->
+  <section style="padding:6rem 0" class="fi">
     <div class="container">
-      <p class="section-label">La experiencia</p>
-      <h2 class="section-title">No es solo un <em>campamento.</em></h2>
-      <p style="color:var(--text-secondary); max-width:560px; font-size:.95rem;">Es el plan que tu verano necesitaba. Tres días de fe, comunidad y actividades para jóvenes de España y otros países.</p>
-
-      <div class="experience-grid">
-        <div class="exp-card">
-          <div class="exp-card-num">01</div>
-          <h3>Crecimiento espiritual</h3>
-          <p>Devocionales, adoración en vivo y espacios para conectar con Dios de verdad, sin prisas.</p>
-        </div>
-        <div class="exp-card">
-          <div class="exp-card-num">02</div>
-          <h3>Toledo de escenario</h3>
-          <p>Una ciudad patrimonio de la humanidad como telón de fondo. Difícil encontrar un sitio mejor.</p>
-        </div>
-        <div class="exp-card">
-          <div class="exp-card-num">03</div>
-          <h3>Noches que no olvidarás</h3>
-          <p>Veladas de adoración, testimonios y tiempo juntos bajo las estrellas de julio.</p>
-        </div>
+      <p class="sl">La experiencia</p>
+      <h2 class="st">No es solo un <em>campamento.</em></h2>
+      <p style="color:var(--text-2);max-width:560px;font-size:.95rem">Es el plan que tu verano necesitaba. Tres días de fe, comunidad y actividades para jóvenes de España y otros países.</p>
+      <div class="exp-grid">
+        <div class="card"><div class="card-num">01</div><h3>Crecimiento espiritual</h3><p>Devocionales, adoración en vivo y espacios para conectar con Dios de verdad, sin prisas.</p></div>
+        <div class="card"><div class="card-num">02</div><h3>Toledo de escenario</h3><p>Una ciudad patrimonio de la humanidad como telón de fondo. Difícil encontrar un sitio mejor.</p></div>
+        <div class="card"><div class="card-num">03</div><h3>Noches que no olvidarás</h3><p>Veladas de adoración, testimonios y tiempo juntos bajo las estrellas de julio.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ VERSE ═══ -->
-  <section class="verse fade-in">
+  <!-- VERSE -->
+  <section class="verse fi">
     <div class="container">
-      <p class="verse-quote">¡Vamos, anímense! ¡Reconstruyamos la muralla de Jerusalén para que ya nadie se burle de nosotros!</p>
+      <p class="verse-q">¡Vamos, anímense! ¡Reconstruyamos la muralla de Jerusalén para que ya nadie se burle de nosotros!</p>
       <p class="verse-ref">Nehemías 2:17</p>
     </div>
   </section>
 
-  <!-- ═══ PRICING ═══ -->
-  <section class="pricing fade-in">
+  <!-- PRICING -->
+  <section style="padding:6rem 0" class="fi">
     <div class="container">
-      <p class="section-label">Inversión</p>
-      <h2 class="section-title">150€ todo <em>incluido.</em></h2>
-
-      <div class="price-card">
-        <div class="price-amount"><span class="currency">€</span>150</div>
-        <p class="price-label">Por persona · Todo incluido</p>
+      <p class="sl">Inversión</p>
+      <h2 class="st">150€ todo <em>incluido.</em></h2>
+      <div class="price-big">
+        <div class="amount"><span class="cur">€</span>150</div>
+        <p class="label">Por persona · Todo incluido</p>
         <ul class="price-features">
           <li>Alojamiento completo</li>
           <li>Todas las comidas</li>
           <li>Piscina y actividades</li>
           <li>Materiales incluidos</li>
         </ul>
-        <a href="inscripcion.html" class="btn">Reservar mi plaza <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a href="inscripcion.html" class="btn" style="margin-top:1rem">Reservar mi plaza →</a>
       </div>
     </div>
   </section>
 
-  <!-- ═══ ITINERARY ═══ -->
-  <section class="itinerary fade-in">
+  <!-- ITINERARY -->
+  <section style="padding:6rem 0" class="fi">
     <div class="container">
-      <p class="section-label">Itinerario</p>
-      <h2 class="section-title">3 días, una <em>experiencia.</em></h2>
-      <p style="color:var(--text-secondary); max-width:500px; font-size:.95rem;">Actividades, adoración y momentos que no vas a querer que acaben.</p>
-
-      <div class="itinerary-grid">
-        <div class="day-card">
-          <p class="day-card-label">Vie · 31 Jul</p>
-          <h3>Llegada y<br>bienvenida</h3>
-        </div>
-        <div class="day-card">
-          <p class="day-card-label">Sáb · 1 Ago</p>
-          <h3>Día completo</h3>
-        </div>
-        <div class="day-card">
-          <p class="day-card-label">Dom · 2 Ago</p>
-          <h3>Cierre y<br>despedida</h3>
-        </div>
+      <p class="sl">Itinerario</p>
+      <h2 class="st">3 días, una <em>experiencia.</em></h2>
+      <div class="itin-grid">
+        <div class="day-card"><p class="day-card-l">Vie · 31 Jul</p><h3>Llegada y<br>bienvenida</h3></div>
+        <div class="day-card"><p class="day-card-l">Sáb · 1 Ago</p><h3>Día completo</h3></div>
+        <div class="day-card"><p class="day-card-l">Dom · 2 Ago</p><h3>Cierre y<br>despedida</h3></div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ FAQ ═══ -->
-  <section class="faq fade-in" id="faq">
+  <!-- FAQ PREVIEW -->
+  <section style="padding:6rem 0" class="fi" id="faq">
     <div class="container">
-      <p class="section-label">Preguntas frecuentes</p>
-      <h2 class="section-title">Todo lo que <em>necesitas saber.</em></h2>
-
-      <div class="faq-list">
-
-        <p class="faq-group-title">General</p>
-
-        <div class="faq-item">
-          <button class="faq-q">¿Quién puede participar? <span class="icon">+</span></button>
-          <div class="faq-a"><p>Adolescentes y jóvenes entre 12 y 30 años que cuenten con recomendación pastoral y, en caso de ser menores, autorización de sus padres o tutores. Sujeto a admisión por parte de la organización. Si tienes dudas, <a href="mailto:jispexespa@gmail.com" style="color:var(--accent);">contacta con nosotros</a>.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q">¿Qué debo llevar? <span class="icon">+</span></button>
-          <div class="faq-a"><p>Ropa cómoda para 3 días, bañador, toalla, protección solar, gorra, Biblia y una libreta. Tras confirmar tu plaza te enviamos una lista detallada.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q">¿Hay transporte organizado? <span class="icon">+</span></button>
-          <div class="faq-a"><p>Sí, contamos con la posibilidad de encontrarnos en Madrid para el traslado al Casar de la Inesa en autocar. Puedes escribirnos luego de tu inscripción para coordinar los detalles.</p></div>
-        </div>
-
-        <p class="faq-group-title">Inscripción y pago</p>
-
-        <div class="faq-item">
-          <button class="faq-q">¿Cómo confirmo mi plaza? <span class="icon">+</span></button>
-          <div class="faq-a"><p>Rellena el formulario y realiza el pago de 150 € por transferencia en los siguientes 5 días. Tu plaza queda confirmada cuando verificamos el pago. La admisión será verificada al cumplimentar todos los requisitos.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q">Soy menor de edad, ¿qué necesito? <span class="icon">+</span></button>
-          <div class="faq-a"><p>Tu tutor legal debe completar la sección correspondiente del formulario y firmar la autorización parental. Se entrega en papel el día de llegada. Sin ella no es posible participar.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q">Vengo de fuera de España, ¿qué necesito? <span class="icon">+</span></button>
-          <div class="faq-a"><p>Necesitas pasaporte vigente y, si eres de Europa, DNI europeo válido y la Tarjeta Sanitaria Europea (EHIC). Para el pago puedes usar transferencia SEPA con el IBAN y BIC que te facilitaremos.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q">¿Cómo envío el comprobante de pago? <span class="icon">+</span></button>
-          <div class="faq-a"><p>Envía el comprobante de pago a <a href="mailto:jispexespa@gmail.com" style="color:var(--accent);">jispexespa@gmail.com</a> indicando el nombre completo del campista al que corresponde el pago. Si se paga en una misma transferencia más de un campista, detallar los nombres completos de cada uno de ellos en el correo.</p></div>
-        </div>
-
+      <p class="sl">Preguntas frecuentes</p>
+      <h2 class="st">Todo lo que <em>necesitas saber.</em></h2>
+      <div>
+        <p class="faq-group-t">General</p>
+        <div class="faq-item"><button class="faq-q">¿Quién puede participar? <span class="icon">+</span></button><div class="faq-a"><p>Adolescentes y jóvenes entre 12 y 30 años que cuenten con recomendación pastoral y, en caso de ser menores, autorización de sus padres o tutores. Sujeto a admisión por parte de la organización. Si tienes dudas, <a href="mailto:jispexespa@gmail.com">contacta con nosotros</a>.</p></div></div>
+        <div class="faq-item"><button class="faq-q">¿Qué debo llevar? <span class="icon">+</span></button><div class="faq-a"><p>Ropa cómoda para 3 días, bañador, toalla, protección solar, gorra, Biblia y una libreta. Tras confirmar tu plaza te enviamos una lista detallada.</p></div></div>
+        <div class="faq-item"><button class="faq-q">¿Hay transporte organizado? <span class="icon">+</span></button><div class="faq-a"><p>Sí, contamos con la posibilidad de encontrarnos en Madrid para el traslado al Casar de la Inesa en autocar. Puedes escribirnos luego de tu inscripción para coordinar los detalles.</p></div></div>
+        <p class="faq-group-t">Inscripción y pago</p>
+        <div class="faq-item"><button class="faq-q">¿Cómo confirmo mi plaza? <span class="icon">+</span></button><div class="faq-a"><p>Rellena el formulario y realiza el pago de 150 € por transferencia en los siguientes 5 días. Tu plaza queda confirmada cuando verificamos el pago. La admisión será verificada al cumplimentar todos los requisitos.</p></div></div>
+        <div class="faq-item"><button class="faq-q">¿Cómo envío el comprobante de pago? <span class="icon">+</span></button><div class="faq-a"><p>Envía el comprobante de pago a <a href="mailto:jispexespa@gmail.com">jispexespa@gmail.com</a> indicando el nombre completo del campista al que corresponde el pago. Si se paga en una misma transferencia más de un campista, detallar los nombres completos de cada uno de ellos en el correo.</p></div></div>
       </div>
-
-      <div style="margin-top:2rem;">
-        <a href="faq.html" class="btn--outline btn">Ver todas las preguntas →</a>
-      </div>
+      <div style="margin-top:2rem"><a href="faq.html" class="btn btn-o">Ver todas las preguntas →</a></div>
     </div>
   </section>
 
-  <!-- ═══ FINAL CTA ═══ -->
-  <section class="final-cta fade-in">
+  <!-- FINAL CTA -->
+  <section class="fcta fi">
     <div class="container">
-      <h2 class="section-title">¿Vienes o <em>qué?</em></h2>
+      <h2 class="st">¿Vienes o <em>qué?</em></h2>
       <p>Las plazas son limitadas y se acaban antes de lo que piensas. No te quedes fuera.</p>
-      <a href="inscripcion.html" class="btn">Inscribirme ahora <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-      <p class="final-cta-meta">Plazas limitadas · 31 jul — 2 ago · Toledo, España</p>
+      <a href="inscripcion.html" class="btn">Inscribirme ahora →</a>
+      <p class="fcta-meta">Plazas limitadas · 31 jul — 2 ago · Toledo, España</p>
     </div>
   </section>
 
-  <!-- ═══ FOOTER ═══ -->
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="container footer-inner">
-      <div>
-        <p class="footer-brand">JISPE CAMP<span class="dot" style="color:var(--accent)">.</span> 2026</p>
-      </div>
+      <div><p class="footer-brand">JISPE <span class="dot">-</span> CAMP<span class="dot">.</span> 2026</p></div>
       <div class="footer-links">
         <a href="normas.html">Normas</a>
         <a href="normas.html">Protección de datos</a>
@@ -768,51 +143,21 @@
     </div>
   </footer>
 
-  <!-- ═══ MOBILE BOTTOM NAV ═══ -->
-  <nav class="mobile-nav">
-    <div class="mobile-nav-inner">
-      <a href="#" class="active">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
-        Inicio
-      </a>
-      <a href="#faq">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg>
-        FAQ
-      </a>
-      <a href="normas.html">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
-        Normas
-      </a>
-      <a href="inscripcion.html">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-        Inscribirme
-      </a>
+  <!-- MOBILE NAV -->
+  <nav class="mnav">
+    <div class="mnav-inner">
+      <a href="index.html" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Inicio</a>
+      <a href="faq.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg>FAQ</a>
+      <a href="normas.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>Normas</a>
+      <a href="inscripcion.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Inscribirme</a>
     </div>
   </nav>
 
-  <!-- ═══ JS ═══ -->
   <script>
-    // Mobile nav toggle
-    const toggle = document.getElementById('navToggle');
-    const links = document.getElementById('navLinks');
-    toggle.addEventListener('click', () => links.classList.toggle('active'));
-
-    // FAQ accordion
-    document.querySelectorAll('.faq-q').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const item = btn.parentElement;
-        const wasOpen = item.classList.contains('open');
-        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-        if (!wasOpen) item.classList.add('open');
-      });
-    });
-
-    // Fade-in on scroll
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    document.getElementById('navToggle').addEventListener('click',()=>document.getElementById('navLinks').classList.toggle('active'));
+    document.querySelectorAll('.faq-q').forEach(b=>{b.addEventListener('click',()=>{const i=b.parentElement,o=i.classList.contains('open');document.querySelectorAll('.faq-item').forEach(x=>x.classList.remove('open'));if(!o)i.classList.add('open')})});
+    const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.1});
+    document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
   </script>
-
 </body>
 </html>
